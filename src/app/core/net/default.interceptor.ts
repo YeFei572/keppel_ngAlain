@@ -60,6 +60,12 @@ export class DefaultInterceptor implements HttpInterceptor {
         //     }
         // }
         break;
+      case 400:
+        const error: any = event instanceof HttpErrorResponse && event.error;
+        if (error) {
+          this.msg.error(error.message || error)
+        }
+        break;
       case 401: // 未登录状态码
         this.goTo('/passport/login');
         break;

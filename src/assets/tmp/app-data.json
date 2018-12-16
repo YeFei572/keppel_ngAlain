@@ -32,8 +32,8 @@
             },
             {
               "text": "目录",
-              "link": "/menu",
-              "i18n": "menu"
+              "link": "/menuList",
+              "i18n": "menuList"
             },
             {
               "text": "监控页",

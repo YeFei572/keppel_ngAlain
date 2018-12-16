@@ -9,7 +9,7 @@
   "menu.dashboard.v1": "Default",
   "menu.dashboard.analysis": "Analysis",
   "menu.dashboard.monitor": "Monitor",
-  "menu": "Menu",
+  "menuList": "Menu List",
   "menu.dashboard.workplace": "Workplace",
   "menu.shortcut": "Shortcut",
   "menu.widgets": "Widgets",

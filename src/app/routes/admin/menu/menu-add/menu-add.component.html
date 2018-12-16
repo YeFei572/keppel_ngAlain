@@ -1,0 +1,21 @@
+<nz-card [nzBordered]="false">
+    <form nz-form [formGroup]="form" (ngSubmit)="submit()" se-container="1" labelWidth="200">
+        <se label="一级目录名称" error="请输入一级目录名称" required>
+            <input nz-input formControlName="text" placeholder="请输入一级目录名称">
+        </se>
+        <se label="英文翻译名" error="请输入一个英文的翻译名" required>
+            <input nz-input formControlName="i18n" placeholder="请输入一个通用的英文翻译名,不可和其他的重复">
+        </se>
+        <se label="角色权限控制" error="请选择角色权限控制">
+            <nz-select formControlName="roles" [nzPlaceHolder]="'请选择角色权限'" nzMode="multiple" [nzShowSearch]="true">
+                <nz-option *ngFor="let i of roleList" [nzLabel]="i.label" [nzValue]="i.value">
+                </nz-option>
+            </nz-select>
+        </se>
+        <se>
+            <button nz-button nzType="primary" [disabled]="form.invalid" type="submit" [nzLoading]="submitting">提交
+            </button>
+            <button nz-button class="ml-sm">保存</button>
+        </se>
+    </form>
+</nz-card>

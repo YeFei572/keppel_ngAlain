@@ -11,7 +11,7 @@ import {DashboardV1Component} from './dashboard/v1/v1.component';
 import {DashboardAnalysisComponent} from './dashboard/analysis/analysis.component';
 import {DashboardMonitorComponent} from './dashboard/monitor/monitor.component';
 import {DashboardWorkplaceComponent} from './dashboard/workplace/workplace.component';
-import {MenuComponent} from './dashboard/menu/menu.component';
+import { MenuListComponent } from "./admin/menu/menu-list/menu-list.component";
 // passport pages
 import {UserLoginComponent} from './passport/login/login.component';
 import {UserRegisterComponent} from './passport/register/register.component';
@@ -22,6 +22,7 @@ import {UserLockComponent} from './passport/lock/lock.component';
 import {Exception403Component} from './exception/403.component';
 import {Exception404Component} from './exception/404.component';
 import {Exception500Component} from './exception/500.component';
+import { MenuAddComponent } from "./admin/menu/menu-add/menu-add.component";
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
       {path: 'dashboard/analysis', component: DashboardAnalysisComponent},
       {path: 'dashboard/monitor', component: DashboardMonitorComponent},
       {path: 'dashboard/workplace', component: DashboardWorkplaceComponent},
-      {path: 'menu', component: MenuComponent},
+      {path: 'menuList', component: MenuListComponent},
+      {path: 'menuAdd', component: MenuAddComponent},
       {
         path: 'widgets',
         loadChildren: './widgets/widgets.module#WidgetsModule',
