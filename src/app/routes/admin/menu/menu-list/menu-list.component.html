@@ -30,14 +30,14 @@
                 </nz-option>
             </nz-select>
         </se>
-        <se *ngIf="menuOrder === 2" label="一级目录名称" error="请输入一级目录名称" required>
+        <se *ngIf="menuOrder === 3" label="一级目录名称" error="请输入一级目录名称" required>
             <nz-select formControlName="firstMenuId" [nzPlaceHolder]="'请选择父目录'" (ngModelChange)="changeOneMenu()" [nzShowSearch]="true">
                 <nz-option *ngFor="let i of categories" [nzLabel]="i.text" [nzValue]="i.id">
                 </nz-option>
             </nz-select>
         </se>
-        <se *ngIf="menuOrder === 2" label="一级目录名称" error="请输入一级目录名称" required>
-            <nz-select formControlName="firstMenuId" [nzPlaceHolder]="'请选择父目录'" (ngModelChange)="changeOneMenu()" [nzShowSearch]="true">
+        <se *ngIf="menuOrder === 3" label="二级目录名称" error="请输入二级目录名称" required>
+            <nz-select formControlName="secondLink" [nzPlaceHolder]="'请选择父目录'" [nzShowSearch]="true">
                 <nz-option *ngFor="let i of secondMenus" [nzLabel]="i.text" [nzValue]="i.link">
                 </nz-option>
             </nz-select>
@@ -51,7 +51,7 @@
         <se *ngIf="menuOrder === 2" label="目录图标" error="请输入一个目录图标" required>
             <input nz-input formControlName="icon" placeholder="请输入一个目录图标,最好和其他的要不一样">
         </se>
-        <se label="跳转链接" *ngIf="menuOrder === 2" error="请输入该目录的跳转地址" required>
+        <se label="跳转链接" *ngIf="menuOrder !== 1" error="请输入该目录的跳转地址" required>
             <input nz-input formControlName="link" placeholder="请输入一个目录跳转地址,最好和其他的要不一样">
         </se>
         <se label="角色权限控制" error="请选择角色权限控制">

@@ -20,6 +20,7 @@ import { Exception500Component } from "./exception/500.component";
 import { MenuListComponent } from "./admin/menu/menu-list/menu-list.component";
 import { MenuAddComponent } from './admin/menu/menu-add/menu-add.component';
 import { EventService } from "@shared/service/EventService";
+import { MenuThirdListComponent } from './admin/menu/menu-third-list/menu-third-list.component';
 
 const COMPONENTS = [
   DashboardV1Component,
@@ -38,6 +39,7 @@ const COMPONENTS = [
   Exception403Component,
   Exception404Component,
   Exception500Component,
+  MenuThirdListComponent,
   MenuAddComponent
 ];
 const COMPONENTS_NOROUNT = [];

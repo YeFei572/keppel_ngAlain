@@ -5,12 +5,12 @@ import { Subscription } from "rxjs";
 import { EventService } from "@shared/service/EventService";
 import { STColumn, STData } from "@delon/abc";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { forEach } from "@angular/router/src/utils/collection";
+import { MenuThirdListComponent } from "../menu-third-list/menu-third-list.component";
 
 @Component({
-  selector: 'app-menu-list',
-  templateUrl: './menu-list.component.html',
-  styleUrls: ['./menu-list.component.less'],
+  selector: "app-menu-list",
+  templateUrl: "./menu-list.component.html",
+  styleUrls: ["./menu-list.component.less"]
 })
 export class MenuListComponent implements OnInit {
 
@@ -27,23 +27,23 @@ export class MenuListComponent implements OnInit {
   ];
 
   columns: STColumn[] = [
-    { title: '二级目录名', index: 'text' },
-    { title: '通用英文名', index: 'i18n' },
-    { title: '路径', index: 'link' },
-    { title: '权限角色', index: 'roles' },
-    { title: '图标', index: 'icon' },
-    {  title: '操作',
+    { title: "二级目录名", index: "text" },
+    { title: "通用英文名", index: "i18n" },
+    { title: "路径", index: "link" },
+    { title: "权限角色", index: "roles" },
+    { title: "图标", index: "icon" },
+    {
+      title: "操作",
       buttons: [
         {
-          text: '配置',
-          click: (item: any) => this.msg.success(`配置${item.no}`),
-        },
-        {
-          text: '订阅警报',
-          click: (item: any) => this.msg.success(`订阅警报${item.no}`),
-        },
-      ],
-    }]
+          text: "查看",
+          type: "modal",
+          component: MenuThirdListComponent,
+          paramName: "i",
+          click: () => this.msg.info("回调，重新发起列表刷新")
+        }
+      ]
+    }];
   selectedRows: STData[] = [];
 
   constructor(
@@ -52,7 +52,8 @@ export class MenuListComponent implements OnInit {
     private http: _HttpClient,
     public msg: NzMessageService,
     private events: EventService
-    ) {}
+  ) {
+  }
 
   ngOnInit() {
     if (this.menuOrder === 1) {
@@ -66,9 +67,9 @@ export class MenuListComponent implements OnInit {
         text: [null, [Validators.required]],
         i18n: [null, [Validators.required]],
         roles: [null, [Validators.required]],
-        firstMenuId: ['', [Validators.required]],
-        icon: ['', [Validators.required]],
-        link: ['', [Validators.required]],
+        firstMenuId: ["", [Validators.required]],
+        icon: ["", [Validators.required]],
+        link: ["", [Validators.required]]
       });
     }
 
@@ -76,24 +77,22 @@ export class MenuListComponent implements OnInit {
 
     this.subscription = this.events.events().subscribe(event => {
       if (event === "create_menu_success") {
-        this.getMenuList("non");
+        this.getMenuList("init");
       }
     });
   }
 
   private getMenuList(status) {
-    this.http.get(`/admin/api/menu/menuList`).subscribe(resp =>{
-      console.log("resp", resp);
-
+    this.http.get(`/admin/api/menu/menuList`).subscribe(resp => {
       this.data = resp["data"];
-      if (status == "init") {
-        this.setFirstMenu();
-      }
-
+      this.categories = [];
       resp["data"].map((k, v) => {
         this.categories.push({ id: k.id, text: k.text, value: false });
       });
-    })
+      if (status == "init") {
+        this.setFirstMenu();
+      }
+    });
   }
 
   changeCategory(status: boolean, idx: number) {
@@ -109,8 +108,10 @@ export class MenuListComponent implements OnInit {
 
   setFirstMenu() {
     console.log("this.data", this.data);
-    if (this.data[0] && this.data[0]['children']) {
-      this.selectedRows = this.data[0]['children'];
+    if (this.data[0] && this.data[0]["children"]) {
+      this.categories[0].value = true;
+      this.selectedRows = [];
+      this.selectedRows = this.data[0]["children"];
       console.log("this.selectedRows", this.selectedRows);
     }
   }
@@ -131,9 +132,9 @@ export class MenuListComponent implements OnInit {
       text: [null, [Validators.required]],
       i18n: [null, [Validators.required]],
       roles: [null, [Validators.required]],
-      firstMenuId: ['', [Validators.required]],
-      icon: ['', [Validators.required]],
-      link: ['', [Validators.required]],
+      firstMenuId: ["", [Validators.required]],
+      icon: ["", [Validators.required]],
+      link: ["", [Validators.required]]
     });
     this.visible = true;
   }
@@ -144,19 +145,21 @@ export class MenuListComponent implements OnInit {
       text: [null, [Validators.required]],
       i18n: [null, [Validators.required]],
       roles: [null, [Validators.required]],
-      firstMenuId: ['', [Validators.required]],
-      icon: ['', [Validators.required]],
-      link: ['', [Validators.required]],
-    })
+      firstMenuId: ["", [Validators.required]],
+      secondLink: ["", [Validators.required]],
+      link: ["", [Validators.required]]
+    });
+    this.visible = true;
   }
 
   close() {
     this.visible = false;
   }
 
-  changeOneMenu(e) {
+  changeOneMenu() {
     this.secondMenus = [];
-    let value = this.oneMenuForm.controls['firstMenuId'].value;
+    this.oneMenuForm.controls.secondLink.setValue("");
+    let value = this.oneMenuForm.controls["firstMenuId"].value;
     if (this.data.length > 0) {
       this.data.map((k, v) => {
         if (k.id == value) {
@@ -170,14 +173,17 @@ export class MenuListComponent implements OnInit {
   submitOneMenu() {
     let url = `/admin/api/menu/createFirstMenu`;
     if (this.menuOrder === 2) {
-      url = `/admin/api/menu/createSecondMenu?firstMenuId=${this.oneMenuForm.controls['firstMenuId'].value}`;
+      url = `/admin/api/menu/createSecondMenu?firstMenuId=${this.oneMenuForm.controls["firstMenuId"].value}`;
     }
-
+    if (this.menuOrder === 3) {
+      url = `/admin/api/menu/createThirdMenu?firstMenuId=${this.oneMenuForm.controls["firstMenuId"].value}&secondLink=${this.oneMenuForm.controls["secondLink"].value}`;
+    }
     this.http.put(url, this.oneMenuForm.value)
       .subscribe(resp => {
         console.log(resp);
-        this.msg.success(resp['message']);
+        this.msg.success(resp["message"]);
         this.events.emit("create_menu_success");
+        this.visible = false;
       });
   }
 

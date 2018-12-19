@@ -23,6 +23,7 @@ import {Exception403Component} from './exception/403.component';
 import {Exception404Component} from './exception/404.component';
 import {Exception500Component} from './exception/500.component';
 import { MenuAddComponent } from "./admin/menu/menu-add/menu-add.component";
+import { MenuThirdListComponent } from "./admin/menu/menu-third-list/menu-third-list.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
       {path: 'dashboard/monitor', component: DashboardMonitorComponent},
       {path: 'dashboard/workplace', component: DashboardWorkplaceComponent},
       {path: 'menuList', component: MenuListComponent},
+      {path: 'menuThird', component: MenuThirdListComponent},
       {path: 'menuAdd', component: MenuAddComponent},
       {
         path: 'widgets',
