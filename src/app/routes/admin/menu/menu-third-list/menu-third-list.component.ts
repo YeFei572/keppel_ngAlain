@@ -10,6 +10,7 @@ import { EventService } from "@shared/service/EventService";
 })
 export class MenuThirdListComponent implements OnInit {
 
+  loading: any;
   columns: STColumn[] = [
     { title: "三级目录名", index: "text" },
     { title: "通用英文名", index: "i18n" },

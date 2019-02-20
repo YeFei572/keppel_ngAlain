@@ -39,11 +39,6 @@
               "text": "监控页",
               "link": "/dashboard/monitor",
               "i18n": "menu.dashboard.monitor"
-            },
-            {
-              "text": "工作台",
-              "link": "/dashboard/workplace",
-              "i18n": "menu.dashboard.workplace"
             }
           ]
         },

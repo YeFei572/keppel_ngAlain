@@ -10,7 +10,7 @@ import {LayoutPassportComponent} from '../layout/passport/passport.component';
 import {DashboardV1Component} from './dashboard/v1/v1.component';
 import {DashboardAnalysisComponent} from './dashboard/analysis/analysis.component';
 import {DashboardMonitorComponent} from './dashboard/monitor/monitor.component';
-import {DashboardWorkplaceComponent} from './dashboard/workplace/workplace.component';
+// import {DashboardWorkplaceComponent} from './dashboard/workplace/workplace.component';
 import { MenuListComponent } from "./admin/menu/menu-list/menu-list.component";
 // passport pages
 import {UserLoginComponent} from './passport/login/login.component';
@@ -36,7 +36,7 @@ const routes: Routes = [
       {path: 'dashboard/v1', component: DashboardV1Component},
       {path: 'dashboard/analysis', component: DashboardAnalysisComponent},
       {path: 'dashboard/monitor', component: DashboardMonitorComponent},
-      {path: 'dashboard/workplace', component: DashboardWorkplaceComponent},
+      // {path: 'dashboard/workplace', component: DashboardWorkplaceComponent},
       {path: 'menuList', component: MenuListComponent},
       {path: 'menuThird', component: MenuThirdListComponent},
       {path: 'menuAdd', component: MenuAddComponent},
