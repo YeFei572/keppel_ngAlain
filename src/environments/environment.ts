@@ -4,7 +4,7 @@
 
 export const environment = {
   // SERVER_URL: `http://1d7a009035.iok.la:10534`,
-  SERVER_URL: `http://localhost:8083`,
+  SERVER_URL: `http://127.0.0.1:8081`,
   production: false,
   useHash: true,
   hmr: false,
