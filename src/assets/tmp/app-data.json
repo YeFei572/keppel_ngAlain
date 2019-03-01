@@ -4,9 +4,9 @@
     "description": "Ng-zorro admin panel front-end framework"
   },
   "user": {
-    "name": "Admi,,,n",
+    "name": "keppel",
     "avatar": "./assets/tmp/img/avatar.jpg",
-    "email": "22222222222"
+    "email": "keppelfei@gmail.com"
   },
   "menu": [
     {
@@ -344,6 +344,27 @@
               "text": "Poi",
               "link": "/extras/poi",
               "i18n": "menu.extras.poi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "系统相关",
+      "i18n": "menu.system",
+      "group": true,
+      "hideInBreadcrumb": false,
+      "children": [
+        {
+          "text": "用户相关",
+          "i18n": "menu.system.user",
+          "link": "/user/admin",
+          "icon": "anticon anticon-dashboard",
+          "children": [
+            {
+              "text": "管理员用户",
+              "link": "/user/admin/admin-list",
+              "i18n": "menu.system.user.admin"
             }
           ]
         }

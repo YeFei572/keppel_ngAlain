@@ -1,0 +1,110 @@
+<nz-card [nzBordered]="false">
+    <form nz-form se-container="1" size="compact" gutter="32" [labelWidth]="null">
+        <se label="操作" line>
+            <button nz-button nzType="primary" (click)="addAdminAccount()">新增账号</button>
+        </se>
+    </form>
+</nz-card>
+
+<nz-card>
+    <nz-table #nzTable [nzData]="data" [nzLoading]="false" [(nzPageIndex)]="_current"
+              [nzPageSize]="_pageSize"
+              (nzPageIndexChange)="refreshData()" [nzTotal]="_total">
+        <thead>
+        <tr>
+            <th>
+                <span><strong>账号</strong></span>
+            </th>
+            <th>
+                <span><strong>昵称</strong></span>
+            </th>
+            <th>
+                <span><strong>手机号</strong></span>
+            </th>
+            <th>
+                <span><strong>是否超级<br/>管理员</strong></span>
+            </th>
+            <th><strong>创建日期</strong></th>
+            <th><strong>更新日期</strong></th>
+            <th><strong>头像</strong></th>
+            <th><strong>管理员类型</strong></th>
+            <th><strong>操作</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>
+                {{data['account']}}
+            </td>
+            <td>
+                {{data['userName']}}
+            </td>
+            <td>
+                {{data['mobile']}}
+            </td>
+            <td>
+                <i *ngIf="data['beSuperAdmin']" class="anticon anticon-check-circle-o text-green"></i>
+                <i *ngIf="!data['beSuperAdmin']" class="anticon anticon-close-circle-o text-red"></i>
+            </td>
+            <td>
+                {{data['createAt'] | date:'yyyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td>
+                {{data['updateAt'] | date:'yyyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td>
+                <img [src]="data['pic']" [class]="banner-image"/>
+            </td>
+            <td>
+                {{data['adminType'] === 0 ? '超级管理员': '普通管理员'}}
+            </td>
+
+            <td>
+                <span>
+                    <nz-popconfirm [nzTitle]="'确定删除该数据吗？此操作不能撤销，请慎重！'" [nzOkText]="'确定'"
+                                   [nzCancelText]="'取消'" (nzOnConfirm)="deleteUser(data['id'])">
+                        <a nz-popconfirm>删除</a>
+                    </nz-popconfirm>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </nz-table>
+</nz-card>
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
+           [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="新增管理员账号" (nzOnClose)="close()">
+    <form nz-form [formGroup]="adminForm" (ngSubmit)="submit()" se-container="1">
+        <se label="账号" error="请输入一个账号" required>
+            <input nz-input formControlName="account" placeholder="请输入一个账号,不可和其他的账号重复">
+        </se>
+        <se label="昵称" error="请输入一个昵称" required>
+            <input nz-input formControlName="userName" placeholder="请输入一个昵称,不可和其他的昵称重复">
+        </se>
+        <se label="密码" error="请输入账号密码, 最少6位数" required>
+            <input nz-input formControlName="password" placeholder="请输入账号密码, 最少6位数">
+        </se>
+        <se label="手机号" error="请输入一个手机号" required>
+            <input nz-input formControlName="mobile" placeholder="请输入一个手机号称,不可和其他的手机号重复">
+        </se>
+        <se label="管理员类别" error="请选择管理员类别">
+            <nz-select formControlName="adminType" [nzPlaceHolder]="'请选择管理员类别'" [nzShowSearch]="true">
+                <nz-option *ngFor="let i of adminTypes" [nzLabel]="i.label" [nzValue]="i.id">
+                </nz-option>
+            </nz-select>
+        </se>
+        <se label="头像" error="请上传头像">
+            <app-images-upload [files]="pics" (onValid)="onImageValid($event)"></app-images-upload>
+        </se>
+        <se label="是否是超级管理员">
+            <nz-switch formControlName="beSuperAdmin">
+                <span>是</span>
+                <span>否</span>
+            </nz-switch>
+        </se>
+    </form>
+    <div class="footer">
+        <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>取消</span></button>
+        <button type="button" [disabled]="adminForm.invalid" (click)="submit()" class="ant-btn ant-btn-primary">
+            <span>添加</span></button>
+    </div>
+</nz-drawer>

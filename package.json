@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "ng": "ng",
-    "start": "npm run color-less && ng serve -o",
+    "start": "npm run color-less && ng serve -o --port 4201",
     "hmr": "npm run color-less && ng serve -c=hmr",
     "build": "npm run color-less && ng build --prod --build-optimizer",
     "analyze": "ng build --prod --build-optimizer --stats-json",

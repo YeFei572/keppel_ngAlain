@@ -73,13 +73,13 @@ export class MenuListComponent implements OnInit {
       });
     }
 
-    this.getMenuList("init");
+    // this.getMenuList("init");
 
-    this.subscription = this.events.events().subscribe(event => {
-      if (event === "create_menu_success") {
-        this.getMenuList("init");
-      }
-    });
+    // this.subscription = this.events.events().subscribe(event => {
+    //   if (event === "create_menu_success") {
+    //     this.getMenuList("init");
+    //   }
+    // });
   }
 
   private getMenuList(status) {

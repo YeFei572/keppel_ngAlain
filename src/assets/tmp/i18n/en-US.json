@@ -149,5 +149,12 @@
   "validation.title.required": "Please enter a title",
   "validation.date.required": "Please select the start and end date",
   "validation.goal.required": "Please enter a description of the goal",
-  "validation.standard.required": "Please enter a metric"
+  "validation.standard.required": "Please enter a metric",
+
+
+  "menu.system": "About System",
+  "menu.system.user": "About System User",
+  "menu.system.user.admin": "About System User Admin",
+  "menu.system.user.admin.list": "Admin User List"
+
 }

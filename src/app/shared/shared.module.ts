@@ -16,6 +16,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CountdownModule } from 'ngx-countdown';
 import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
+import { ImagesUploadComponent } from "@shared/components/images-upload.component";
 
 const THIRDMODULES = [
   NgZorroAntdModule,
@@ -26,7 +27,7 @@ const THIRDMODULES = [
 // #endregion
 
 // #region your componets & directives
-const COMPONENTS = [];
+const COMPONENTS = [ImagesUploadComponent];
 const DIRECTIVES = [];
 // #endregion
 

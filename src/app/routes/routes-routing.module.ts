@@ -48,6 +48,7 @@ const routes: Routes = [
       {path: 'delon', loadChildren: './delon/delon.module#DelonModule'},
       {path: 'extras', loadChildren: './extras/extras.module#ExtrasModule'},
       {path: 'pro', loadChildren: './pro/pro.module#ProModule'},
+      {path: 'user', loadChildren: './user/user.module#UserModule'}
     ],
   },
   // 全屏布局
