@@ -78,12 +78,16 @@ export class AdminUserListComponent implements OnInit {
     }
 
     close() {
-        console.log("form", this.adminForm.value);
         this.visible = false;
     }
 
     submit() {
-        console.log(this.adminForm.value);
+        this.http.post(`/admin/api/accounts/create`, this.adminForm.value)
+            .subscribe(resp => {
+                this.msg.success(resp["message"]);
+                this.visible = false;
+                this.refreshData();
+            })
     }
 
 }
